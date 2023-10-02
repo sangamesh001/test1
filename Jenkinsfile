@@ -1,0 +1,33 @@
+pipeline {
+  agent any
+  options {
+    timeout(time: 1, unit: 'HOURS')
+  }
+  triggers {
+    pollSCM('* * * * *')
+  }
+  stages{
+    stage('vcs') {
+        steps {
+            git url: 'https://github.com/sangamesh00/spring-petclinic.git',
+                branch: 'main'
+        }
+    }
+    stage('build') {
+        steps {
+            sh script: '/usr/share/maven/apache-maven-3.9.4/bin/mvn package'
+        }
+    }
+    stage('test11') {
+        steps {
+            junit testResults: '**/surefire-reports/TEST-*.xml'
+        }
+    }
+    stage('artifact'){
+        steps {
+            archiveArtifacts artifacts: '**/*.jar'
+        }
+    }
+  }
+  
+}
