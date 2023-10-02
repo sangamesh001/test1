@@ -4,7 +4,7 @@ pipeline {
     timeout(time: 1, unit: 'HOURS')
   }
   triggers {
-    pollSCM('* * * * *')
+    pollSCM('25 12 * * *')
   }
   stages{
     stage('vcs') {
