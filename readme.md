@@ -18,6 +18,7 @@ cd spring-petclinic
 ./mvnw package
 java -jar target/*.jar
 ```
+.
 
 You can then access petclinic at http://localhost:8080/
 
